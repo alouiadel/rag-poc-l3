@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1067" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Knowledge graph">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220" />
+      <stop offset="0.55" stop-color="#0f1b30" />
+      <stop offset="1" stop-color="#111f38" />
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.75" cy="0.25" r="0.6">
+      <stop offset="0" stop-color="#f57c00" stop-opacity="0.55" />
+      <stop offset="1" stop-color="#f57c00" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glow1b" cx="0.2" cy="0.8" r="0.55">
+      <stop offset="0" stop-color="#38bdf8" stop-opacity="0.35" />
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1067" fill="url(#bg1)" />
+  <rect width="1600" height="1067" fill="url(#glow1)" />
+  <rect width="1600" height="1067" fill="url(#glow1b)" />
+  <g stroke="#1e3a5f" stroke-width="1" opacity="0.5">
+    <path d="M0 200H1600M0 400H1600M0 600H1600M0 800H1600M0 1000H1600" />
+    <path d="M200 0V1067M400 0V1067M600 0V1067M800 0V1067M1000 0V1067M1200 0V1067M1400 0V1067" />
+  </g>
+  <g stroke="#f57c00" stroke-width="2.5" opacity="0.75">
+    <path d="M340 360 L700 260 L1040 420 L1260 700 L900 820 L520 700 Z" fill="none" />
+    <path d="M700 260 L900 820M340 360 L1260 700M1040 420 L520 700" fill="none" />
+  </g>
+  <g fill="#ff9d3c">
+    <circle cx="340" cy="360" r="16" />
+    <circle cx="700" cy="260" r="22" />
+    <circle cx="1040" cy="420" r="16" />
+    <circle cx="1260" cy="700" r="24" />
+    <circle cx="900" cy="820" r="16" />
+    <circle cx="520" cy="700" r="20" />
+  </g>
+  <g fill="#e2e8f0" opacity="0.9">
+    <circle cx="700" cy="260" r="7" />
+    <circle cx="1260" cy="700" r="8" />
+    <circle cx="520" cy="700" r="7" />
+  </g>
+</svg>

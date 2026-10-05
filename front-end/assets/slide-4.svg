@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1067" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Neural network">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220" />
+      <stop offset="0.5" stop-color="#111d36" />
+      <stop offset="1" stop-color="#0d1526" />
+    </linearGradient>
+    <radialGradient id="glow4" cx="0.8" cy="0.8" r="0.6">
+      <stop offset="0" stop-color="#f57c00" stop-opacity="0.45" />
+      <stop offset="1" stop-color="#f57c00" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1067" fill="url(#bg4)" />
+  <rect width="1600" height="1067" fill="url(#glow4)" />
+  <g stroke="#f57c00" stroke-width="1.6" opacity="0.35">
+    <path d="M420 250 L780 170 M420 250 L780 400 M420 250 L780 630M420 530 L780 170M420 530 L780 400M420 530 L780 630M420 810 L780 400M420 810 L780 630M420 810 L780 860" />
+    <path d="M780 170 L1140 320 M780 400 L1140 320M780 400 L1140 560M780 630 L1140 320M780 630 L1140 560M780 630 L1140 800M780 860 L1140 560M780 860 L1140 800" />
+  </g>
+  <g fill="#ff9d3c">
+    <circle cx="420" cy="250" r="17" /><circle cx="420" cy="530" r="17" /><circle cx="420" cy="810" r="17" />
+    <circle cx="780" cy="170" r="19" /><circle cx="780" cy="400" r="19" /><circle cx="780" cy="630" r="19" /><circle cx="780" cy="860" r="19" />
+    <circle cx="1140" cy="320" r="21" /><circle cx="1140" cy="560" r="21" /><circle cx="1140" cy="800" r="21" />
+  </g>
+  <g fill="#e2e8f0" opacity="0.95">
+    <circle cx="780" cy="400" r="6" /><circle cx="1140" cy="560" r="7" />
+  </g>
+</svg>

@@ -1,0 +1,245 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+  --bg-main: #02113c;
+  --bg-sidebar: #010a2b;
+  --bg-stat: #1a2454;
+  --orange: #f58a00;
+  --white: #ffffff;
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-orange: rgba(245, 138, 0, 0.45);
+}
+
+body {
+  min-height: 100vh;
+  background: #dcdcdc;
+  padding: 8px;
+}
+
+.app {
+  width: 100%;
+  min-height: calc(100vh - 16px);
+  display: flex;
+  background: var(--bg-main);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #16234a;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px 12px;
+}
+
+.brand {
+  width: 100%;
+}
+
+.brand-logo {
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid var(--border-soft);
+  border-radius: 20px;
+  background: rgba(8, 24, 73, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px;
+  text-align: left;
+}
+
+.logo-img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.brand-text h2 {
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.side-btn {
+  width: 100%;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 22px;
+  border: 1px solid var(--border-orange);
+  background: transparent;
+  color: var(--white);
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.side-btn:hover {
+  background: rgba(245, 138, 0, 0.08);
+}
+
+.admin-btn {
+  font-weight: 700;
+}
+
+/* MAIN */
+.main-content {
+  flex: 1;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stats-card {
+  width: 100%;
+  max-width: 1180px;
+  min-height: 720px;
+  background: #041a63;
+  border: 1px solid var(--border-soft);
+  border-radius: 34px;
+  padding: 42px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.stats-card h1 {
+  color: var(--white);
+  font-size: 50px;
+  font-weight: 800;
+  margin-bottom: 52px;
+}
+
+.stats-grid {
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 34px 46px;
+}
+
+.stat-item {
+  height: 220px;
+  background: var(--bg-stat);
+  border: 1px solid rgba(245, 138, 0, 0.35);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-number {
+  color: var(--orange);
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 18px;
+}
+
+.stat-label {
+  color: var(--white);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .stats-card {
+    max-width: 1000px;
+    min-height: auto;
+    padding: 34px;
+  }
+
+  .stats-card h1 {
+    font-size: 40px;
+    margin-bottom: 36px;
+  }
+
+  .stat-item {
+    height: 180px;
+  }
+
+  .stat-number {
+    font-size: 38px;
+  }
+
+  .stat-label {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    gap: 18px;
+  }
+
+  .sidebar-bottom {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .side-btn {
+    flex: 1 1 150px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+  }
+
+  .stats-card h1 {
+    font-size: 34px;
+  }
+}
+
+/* BACK TO CHAT BUTTON */
+.back-to-chat {
+  position: fixed;
+  top: 150px;
+  left: 16px;
+  z-index: 1000;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 2px solid var(--orange);
+  background: var(--bg-main);
+  color: var(--orange);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.back-to-chat:hover {
+  background: var(--orange);
+  color: var(--bg-main);
+}

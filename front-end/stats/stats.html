@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1220" />
+    <title>RAG PoC L3 - Statistics</title>
+    <link rel="icon" type="image/svg+xml" href="/static/assets/favicon.svg" />
+    <link rel="stylesheet" href="/static/lib/theme.css" />
+    <link rel="stylesheet" href="/static/stats/stats.css" />
+  </head>
+  <body>
+    <button class="back-to-chat" onclick="window.location.href = '/chat'">
+      Back to Chat
+    </button>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-logo">
+            <img
+              src="/static/assets/logo.svg"
+              alt="RAG PoC L3 Logo"
+              class="logo-img"
+            />
+            <div class="brand-text">
+              <h2>RAG PoC L3</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-bottom">
+          <button class="side-btn" id="adminControlsBtn">
+            <svg class="icon" aria-hidden="true">
+              <use href="/static/lib/icons.svg#i-shield" />
+            </svg>
+            Admin panel
+          </button>
+          <button class="side-btn" id="logoutAdminBtn">
+            <svg class="icon" aria-hidden="true">
+              <use href="/static/lib/icons.svg#i-logout" />
+            </svg>
+            Déconnexion
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <div class="stats-card">
+          <h1>Vector store statistics</h1>
+
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-number" id="statVectors">-</span>
+              <span class="stat-label">VECTORS</span>
+            </div>
+
+            <div class="stat-item">
+              <span class="stat-number" id="statCollection">-</span>
+              <span class="stat-label">COLLECTION</span>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="/static/config.js"></script>
+    <script src="/static/lib/ui.js"></script>
+    <script>
+      if (guardAuth("admin")) {
+        const token = getToken();
+
+        document
+          .getElementById("logoutAdminBtn")
+          .addEventListener("click", () => logout());
+
+        document
+          .getElementById("adminControlsBtn")
+          .addEventListener("click", () => {
+            window.location.href = "/admin";
+          });
+
+        async function loadStats() {
+          const vectorsEl = document.getElementById("statVectors");
+          const collectionEl = document.getElementById("statCollection");
+          try {
+            const response = await fetch(API_ENDPOINTS.collectionInfo, {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+            const data = await response.json().catch(() => ({}));
+
+            if (response.ok) {
+              vectorsEl.textContent = data.points_count ?? 0;
+              collectionEl.textContent = data.collection_name || "-";
+            } else {
+              vectorsEl.textContent = "-";
+              collectionEl.textContent = "error";
+            }
+          } catch (e) {
+            console.error("Failed to load stats:", e);
+            vectorsEl.textContent = "-";
+            collectionEl.textContent = "offline";
+          }
+        }
+
+        loadStats();
+      }
+    </script>
+  </body>
+</html>

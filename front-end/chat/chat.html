@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1220" />
+    <title>RAG PoC L3 - Chat</title>
+    <link rel="icon" type="image/svg+xml" href="/static/assets/favicon.svg" />
+    <link rel="stylesheet" href="/static/lib/theme.css" />
+    <link rel="stylesheet" href="/static/chat/chat.css" />
+  </head>
+
+  <body>
+    <div class="app">
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="logo">
+            <img src="/static/assets/logo.svg" alt="RAG PoC L3 Logo" />
+          </div>
+
+          <div class="brand-text">
+            <div class="brand-title">RAG PoC L3</div>
+            <div class="brand-sub">(RAG - PoC - L3)</div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-block" id="newChatBtn" type="button">
+          <svg class="icon" aria-hidden="true">
+            <use href="/static/lib/icons.svg#i-plus" />
+          </svg>
+          Nouveau chat
+        </button>
+
+        <div class="sidebar-section">
+          <div class="section-title">
+            <svg class="icon" aria-hidden="true">
+              <use href="/static/lib/icons.svg#i-chat" />
+            </svg>
+            Historique
+          </div>
+
+          <div class="history" id="historyList">
+            <div class="empty-history">
+              <div class="empty-hint">
+                Aucune discussion pour le moment.<br />
+                Clique sur <b>Nouveau chat</b> pour commencer.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-footer">
+          <!-- Personnalité (custom dropdown) -->
+          <div class="persona-wrap">
+            <div class="section-title">
+              <svg class="icon" aria-hidden="true">
+                <use href="/static/lib/icons.svg#i-sparkles" />
+              </svg>
+              Personnalité
+            </div>
+            <div class="persona-dropdown" id="personaDropdown">
+              <button
+                type="button"
+                class="persona-trigger"
+                id="personaTrigger"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+              >
+                <span class="persona-label" id="personaLabel"
+                  >Aucune personnalité</span
+                >
+                <svg class="icon persona-chevron" aria-hidden="true">
+                  <use href="/static/lib/icons.svg#i-chevron" />
+                </svg>
+              </button>
+              <ul class="persona-menu" id="personaMenu" role="listbox" hidden></ul>
+            </div>
+          </div>
+
+          <!-- Bouton Admin : visible uniquement pour les admins (géré en JS) -->
+          <button
+            class="btn btn-admin btn-block"
+            id="adminBtn"
+            type="button"
+            style="display: none"
+          >
+            <svg class="icon" aria-hidden="true">
+              <use href="/static/lib/icons.svg#i-shield" />
+            </svg>
+            Admin Panel
+          </button>
+
+          <div class="user-card">
+            <div class="avatar" id="sidebarAvatar">FA</div>
+            <div class="user-info">
+              <div class="user-name" id="sidebarUserName">Utilisateur</div>
+              <div class="user-role" id="sidebarUserRole">Employé</div>
+            </div>
+
+            <button class="link-logout" id="logoutBtn" type="button">
+              <svg class="icon" aria-hidden="true">
+                <use href="/static/lib/icons.svg#i-logout" />
+              </svg>
+              Déconnexion
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ===== MAIN ===== -->
+      <main class="main">
+        <header class="topbar">
+          <div class="page-title">
+            <h1 id="chatTitle">Nouveau chat</h1>
+          </div>
+        </header>
+
+        <section class="chat">
+          <div class="messages" id="messages"></div>
+
+          <div class="composer">
+            <button
+              class="icon-btn"
+              type="button"
+              title="Joindre un fichier"
+              aria-label="Joindre un fichier"
+            >
+              <svg class="icon" aria-hidden="true">
+                <use href="/static/lib/icons.svg#i-paperclip" />
+              </svg>
+            </button>
+            <button
+              class="icon-btn"
+              type="button"
+              title="Reconnaissance vocale bientôt disponible"
+              aria-label="Reconnaissance vocale bientôt disponible"
+              disabled
+            >
+              <svg class="icon" aria-hidden="true">
+                <use href="/static/lib/icons.svg#i-mic" />
+              </svg>
+            </button>
+
+            <input
+              id="messageInput"
+              class="composer-input"
+              type="text"
+              placeholder="Écris ta question ici..."
+              autocomplete="off"
+              aria-label="Message"
+            />
+
+            <button
+              id="sendBtn"
+              class="btn btn-primary"
+              type="button"
+              aria-label="Envoyer le message"
+            >
+              <svg class="icon" aria-hidden="true">
+                <use href="/static/lib/icons.svg#i-send" />
+              </svg>
+              Envoyer
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/static/lib/marked.min.js"></script>
+    <script>
+      window.addEventListener("load", () => {
+        if (!window.marked || !window.marked.parse) {
+          console.error("marked.js failed to load!");
+        }
+      });
+    </script>
+    <script src="/static/config.js"></script>
+    <script src="/static/lib/purify.min.js"></script>
+    <script src="/static/lib/ui.js"></script>
+    <script src="/static/chat/chat.js?v=8"></script>
+  </body>
+</html>

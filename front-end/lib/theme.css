@@ -1,0 +1,234 @@
+/* Shared theme: reset + common chrome used by every page.
+   Load before the page-specific stylesheet. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+/* Form controls inherit the page font and are clickable by default. */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* Visible keyboard focus everywhere. */
+:focus-visible {
+  outline: 2px solid var(--orange, #f57c00);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: rgba(245, 124, 0, 0.35);
+  color: #fff;
+}
+
+/* Slim, theme-matching scrollbars. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Inline SVG icons (see lib/icons.svg). */
+.icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon-lg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Accessible label that is visually hidden. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.user-role {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ===== App dialog (replaces native alert/confirm) ===== */
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(2, 6, 23, 0.66);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.16s ease;
+}
+
+.dialog-overlay.open {
+  opacity: 1;
+}
+
+.dialog {
+  width: min(440px, 100%);
+  background: #0f172a;
+  border: 1px solid rgba(245, 124, 0, 0.28);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  transform: translateY(10px) scale(0.98);
+  transition: transform 0.16s ease;
+}
+
+.dialog-overlay.open .dialog {
+  transform: translateY(0) scale(1);
+}
+
+.dialog-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dialog-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #f1f5f9;
+}
+
+.dialog-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dialog-close:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.dialog-message {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+  white-space: pre-line;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.dialog-cancel,
+.dialog-confirm {
+  padding: 11px 18px;
+  border-radius: 13px;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.dialog-cancel {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.dialog-cancel:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.dialog-confirm {
+  background: #f57c00;
+  color: #000;
+}
+
+.dialog-confirm:hover {
+  background: #ff8f1f;
+}
+
+.dialog-confirm.danger {
+  background: transparent;
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.dialog-confirm.danger:hover {
+  background: rgba(239, 68, 68, 0.12);
+}
+
+/* Respect users who prefer less motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

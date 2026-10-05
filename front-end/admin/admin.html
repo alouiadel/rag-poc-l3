@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1220" />
+    <title>RAG PoC L3 – Admin Panel</title>
+    <link rel="icon" type="image/svg+xml" href="/static/assets/favicon.svg" />
+    <link rel="stylesheet" href="/static/lib/theme.css" />
+    <link rel="stylesheet" href="/static/admin/admin.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- ===== SIDEBAR ===== -->
+      <aside class="sidebar">
+        <div class="sidebar-top">
+          <div class="logo">
+            <img src="/static/assets/logo.svg" alt="RAG PoC L3 Logo" />
+          </div>
+          <div class="brand-text">
+            <div class="brand-title">RAG PoC L3</div>
+            <div class="brand-sub">Admin Panel</div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <button class="nav-btn active" data-section="personas" type="button">
+            <svg class="icon" aria-hidden="true">
+              <use href="/static/lib/icons.svg#i-sparkles" />
+            </svg>
+            Personnalités
+          </button>
+          <button class="nav-btn" data-section="users" type="button">
+            <svg class="icon" aria-hidden="true">
+              <use href="/static/lib/icons.svg#i-users" />
+            </svg>
+            Utilisateurs
+          </button>
+          <button class="nav-btn" data-section="kb" type="button">
+            <svg class="icon" aria-hidden="true">
+              <use href="/static/lib/icons.svg#i-database" />
+            </svg>
+            Base de connaissances
+          </button>
+          <button
+            class="nav-btn"
+            type="button"
+            onclick="window.location.href = '/chat'"
+          >
+            <svg class="icon" aria-hidden="true">
+              <use href="/static/lib/icons.svg#i-chat" />
+            </svg>
+            Retour au Chat
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="user-card">
+            <div class="avatar-sm" id="adminAvatar">A</div>
+            <div class="user-info">
+              <div class="user-name" id="adminName">Admin</div>
+              <div class="user-role">Administrateur</div>
+            </div>
+          </div>
+          <button class="btn-logout" id="logoutBtn">
+            <svg class="icon" aria-hidden="true">
+              <use href="/static/lib/icons.svg#i-logout" />
+            </svg>
+            Déconnexion
+          </button>
+        </div>
+      </aside>
+
+      <!-- ===== MAIN ===== -->
+      <main class="main">
+        <!-- PERSONAS -->
+        <section class="admin-section" id="section-personas">
+          <div class="main-header">
+            <div>
+              <h1>Gestion des Personnalités IA</h1>
+              <p class="subtitle">
+                Créer et ajuster les assistants disponibles dans le chat
+              </p>
+            </div>
+            <div class="header-badge" id="countBadge">0 / 5 personnalités</div>
+          </div>
+
+          <div class="cards-grid" id="cardsGrid">
+            <!-- cartes générées par JS -->
+          </div>
+        </section>
+
+        <!-- USERS -->
+        <section class="admin-section" id="section-users" hidden>
+          <div class="main-header">
+            <div>
+              <h1>Utilisateurs</h1>
+              <p class="subtitle">
+                Gérer les comptes et les droits d'administration
+              </p>
+            </div>
+            <button class="btn-refresh" id="usersRefresh" type="button">
+              <svg class="icon" aria-hidden="true">
+                <use href="/static/lib/icons.svg#i-refresh" />
+              </svg>
+              Rafraîchir
+            </button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Utilisateur</th>
+                  <th>Nom complet</th>
+                  <th>Rôle</th>
+                  <th class="col-action">Action</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody">
+                <tr>
+                  <td colspan="4" class="table-empty">Chargement…</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- KNOWLEDGE BASE -->
+        <section class="admin-section" id="section-kb" hidden>
+          <div class="main-header">
+            <div>
+              <h1>Base de connaissances</h1>
+              <p class="subtitle">
+                État de la base vectorielle et ingestion de contenu
+              </p>
+            </div>
+            <button class="btn-refresh" id="kbRefresh" type="button">
+              <svg class="icon" aria-hidden="true">
+                <use href="/static/lib/icons.svg#i-refresh" />
+              </svg>
+              Rafraîchir
+            </button>
+          </div>
+
+          <div class="kb-stats">
+            <div class="kb-stat">
+              <div class="kb-stat-value" id="kbVectors">-</div>
+              <div class="kb-stat-label">Vecteurs</div>
+            </div>
+            <div class="kb-stat">
+              <div class="kb-stat-value" id="kbCollection">-</div>
+              <div class="kb-stat-label">Collection</div>
+            </div>
+          </div>
+
+          <div class="kb-panel">
+            <label for="kbText">Ajouter du texte à la base</label>
+            <textarea
+              id="kbText"
+              rows="6"
+              placeholder="Collez ici le contenu à ingérer (texte brut)…"
+            ></textarea>
+            <div class="kb-actions">
+              <button class="btn-save" id="kbIngest" type="button">
+                <svg class="icon" aria-hidden="true">
+                  <use href="/static/lib/icons.svg#i-upload" />
+                </svg>
+                Ingérer
+              </button>
+              <button class="btn-danger" id="kbReset" type="button">
+                <svg class="icon" aria-hidden="true">
+                  <use href="/static/lib/icons.svg#i-trash" />
+                </svg>
+                Réinitialiser la base
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- ===== MODAL EDIT / CREATE ===== -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="modalTitle">Nouvelle personnalité</h2>
+          <button class="modal-close" id="modalClose" aria-label="Fermer">
+            <svg class="icon" aria-hidden="true">
+              <use href="/static/lib/icons.svg#i-x" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <label for="modalName">Nom de la personnalité</label>
+          <input
+            type="text"
+            id="modalName"
+            placeholder="Ex: Expert Sécurité"
+            maxlength="40"
+          />
+
+          <label for="modalPrompt"
+            >Prompt système
+            <span class="char-count" id="charCount">0 / 500</span></label
+          >
+          <textarea
+            id="modalPrompt"
+            placeholder="Décris le comportement de cet assistant..."
+            maxlength="500"
+          ></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-cancel" id="modalCancel">Annuler</button>
+          <button class="btn-save" id="modalSave">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script src="/static/config.js"></script>
+    <script src="/static/lib/ui.js"></script>
+    <script src="/static/admin/admin.js"></script>
+  </body>
+</html>

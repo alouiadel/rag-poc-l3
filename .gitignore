@@ -1,0 +1,11 @@
+.env
+/venv
+.venv/
+.rag-poc/
+__pycache__
+users.db
+data/*.db
+qdrant_storage
+.vscode
+rag-poc-data-v0
+.DS_Store

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1220" />
+    <title>RAG PoC L3 — Connexion</title>
+    <link rel="icon" type="image/svg+xml" href="/static/assets/favicon.svg" />
+    <link rel="stylesheet" href="/static/lib/theme.css" />
+    <link rel="stylesheet" href="/static/login/login.css" />
+  </head>
+
+  <body>
+    <!--  SLIDER -->
+    <div class="top-section">
+      <!-- LOGO -->
+      <div class="logo">
+        <img src="/static/assets/logo.svg" alt="RAG PoC L3 logo" />
+      </div>
+
+      <!-- SLIDES -->
+      <div class="slider">
+        <div class="slide active">
+          <img src="/static/assets/slide-1.svg" alt="" />
+          <div class="overlay"></div>
+        </div>
+
+        <div class="slide">
+          <img src="/static/assets/slide-2.svg" alt="" />
+          <div class="overlay"></div>
+        </div>
+
+        <div class="slide">
+          <img src="/static/assets/slide-3.svg" alt="" />
+          <div class="overlay"></div>
+        </div>
+
+        <div class="slide">
+          <img src="/static/assets/slide-4.svg" alt="" />
+          <div class="overlay"></div>
+        </div>
+      </div>
+    </div>
+
+    <!--  LOGIN -->
+    <div class="container">
+      <form class="login-box" id="loginForm" novalidate>
+        <h1>Welcome to RAG PoC L3</h1>
+        <p class="subtitle">Retrieval-Augmented Generation</p>
+
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          placeholder="Enter your username"
+          autocomplete="username"
+          autofocus
+        />
+
+        <label for="password">Password</label>
+        <div class="password-field">
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            id="togglePassword"
+            aria-label="Afficher le mot de passe"
+            aria-pressed="false"
+          >
+            Afficher
+          </button>
+        </div>
+
+        <button id="loginBtn" type="submit">Login</button>
+
+        <p class="error-message" id="errorMessage" role="alert"></p>
+      </form>
+    </div>
+
+    <script src="/static/config.js"></script>
+    <script src="/static/lib/ui.js"></script>
+    <script src="/static/login/login.js"></script>
+
+    <!--  SLIDER JS -->
+    <script>
+      let slides = document.querySelectorAll(".slide");
+      let index = 0;
+
+      setInterval(() => {
+        slides[index].classList.remove("active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("active");
+      }, 4000);
+    </script>
+  </body>
+</html>
